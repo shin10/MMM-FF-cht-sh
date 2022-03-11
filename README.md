@@ -101,7 +101,7 @@ The items in the sheet list need a path. All other properties are optional. The 
 ```js
 {
   path: ":random",
-  options: "qTcCQ"
+  options: "qTcCQ",
   style: "lovelace",
   weight: 10
 }
