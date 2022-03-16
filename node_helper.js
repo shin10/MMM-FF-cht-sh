@@ -25,6 +25,7 @@ module.exports = NodeHelper.create({
 
   startInterval: function (config) {
     this.stopInterval(config);
+    if (config.updateInterval === null) return;
 
     config.updateOnVisibilityChangeRequested = false;
     if (!this.instanceData[config.moduleId]) this.instanceData[config.moduleId] = config;
