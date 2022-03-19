@@ -27,10 +27,10 @@ Module.register("MMM-Ff-cht-sh", {
     ],
     options: "q",
     style: "default",
-    sequence: null, // null, 'random', 'default', 'reverse'
+    sequence: "default", // null, 'random', 'default', 'reverse'
     updateOnSuspension: null, // null, false or true
     updateInterval: 10 * 60 * 1000, // 10 minutes
-    loadingCursor: " &block;",
+    loadingCursor: "&nbsp;&block;",
     showTitle: true,
     animationSpeed: 1000,
     scrollAmount: null,
@@ -52,7 +52,9 @@ Module.register("MMM-Ff-cht-sh", {
   start: function () {
     Log.info("Starting module: " + this.name);
     this.config.moduleId = this.identifier;
-    this.sendSocketNotification("GET_INITIAL_CHEAT_SHEET", { config: this.config });
+    this.sendSocketNotification("GET_INITIAL_CHEAT_SHEET", {
+      config: this.config
+    });
   },
 
   getScripts: function () {
@@ -83,7 +85,10 @@ Module.register("MMM-Ff-cht-sh", {
     } else if (!this.cheatSheetData?.html) {
       wrapper.innerHTML = this.cheatSheetData?.header;
     } else {
-      wrapper.innerHTML = this.cheatSheetData?.style + this.cheatSheetData?.header + this.cheatSheetData?.html;
+      wrapper.innerHTML =
+        this.cheatSheetData?.style +
+        this.cheatSheetData?.header +
+        this.cheatSheetData?.html;
     }
 
     return wrapper;
@@ -92,7 +97,10 @@ Module.register("MMM-Ff-cht-sh", {
   scrollCheatSheet: function (direction) {
     const sheet = document.querySelector(`#${this.identifier} .cht-sh`);
     if (!sheet) return;
-    sheet.scrollBy(0, direction * (this.config.scrollAmount || sheet.offsetHeight));
+    sheet.scrollBy(
+      0,
+      direction * (this.config.scrollAmount || sheet.offsetHeight)
+    );
   },
 
   socketNotificationReceived: function (notification, payload) {
@@ -105,7 +113,8 @@ Module.register("MMM-Ff-cht-sh", {
         break;
       case "UPDATE_CHEAT_SHEET":
         this.error = null;
-        this.config.cheatSheet = this.cheatSheetData = payload.config.cheatSheet;
+        this.config.cheatSheet = this.cheatSheetData =
+          payload.config.cheatSheet;
         this.updateDom(this.config.animationSpeed);
         break;
       default:
@@ -116,7 +125,12 @@ Module.register("MMM-Ff-cht-sh", {
   isAcceptableSender(sender) {
     if (!sender) return true;
     const acceptableSender = this.config.events.sender;
-    return !acceptableSender || acceptableSender === sender.identifier || (Array.isArray(acceptableSender) && acceptableSender.includes(sender.identifier));
+    return (
+      !acceptableSender ||
+      acceptableSender === sender.identifier ||
+      (Array.isArray(acceptableSender) &&
+        acceptableSender.includes(sender.identifier))
+    );
   },
 
   notificationReceived: function (notification, payload, sender) {
@@ -130,16 +144,28 @@ Module.register("MMM-Ff-cht-sh", {
         if (!this.hidden) this.scrollCheatSheet(-1 * (payload || 1));
         break;
       case this.config.events.CHEAT_SHEET_LIST_ITEM_PREVIOUS:
-        if (!this.hidden) this.sendSocketNotification("GET_PREVIOUS_CHEAT_SHEET_LIST_ITEM", { config: this.config });
+        if (!this.hidden)
+          this.sendSocketNotification("GET_PREVIOUS_CHEAT_SHEET_LIST_ITEM", {
+            config: this.config
+          });
         break;
       case this.config.events.CHEAT_SHEET_LIST_ITEM_NEXT:
-        if (!this.hidden) this.sendSocketNotification("GET_NEXT_CHEAT_SHEET_LIST_ITEM", { config: this.config });
+        if (!this.hidden)
+          this.sendSocketNotification("GET_NEXT_CHEAT_SHEET_LIST_ITEM", {
+            config: this.config
+          });
         break;
       case this.config.events.CHEAT_SHEET_LIST_ITEM_RANDOM:
-        if (!this.hidden) this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET_LIST_ITEM", { config: this.config });
+        if (!this.hidden)
+          this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET_LIST_ITEM", {
+            config: this.config
+          });
         break;
       case this.config.events.CHEAT_SHEET_RANDOM:
-        if (!this.hidden) this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET", { config: this.config });
+        if (!this.hidden)
+          this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET", {
+            config: this.config
+          });
         break;
       default:
         break;
