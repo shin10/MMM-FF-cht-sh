@@ -127,9 +127,11 @@ Module.register("MMM-Ff-cht-sh", {
     const acceptableSender = this.config.events.sender;
     return (
       !acceptableSender ||
+      acceptableSender === sender.name ||
       acceptableSender === sender.identifier ||
       (Array.isArray(acceptableSender) &&
-        acceptableSender.includes(sender.identifier))
+        (acceptableSender.includes(sender.name) ||
+          acceptableSender.includes(sender.identifier)))
     );
   },
 
