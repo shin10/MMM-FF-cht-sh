@@ -62,7 +62,7 @@ Module.register("MMM-Ff-cht-sh", {
   },
 
   getStyles: function () {
-    return ["MMM-Ff-cht-sh.css"];
+    return [this.file("./styles/MMM-FF-cht-sh.css")];
   },
 
   getHeader: function () {
