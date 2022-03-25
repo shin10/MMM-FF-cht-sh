@@ -1,11 +1,11 @@
 /* Magic Mirror
- * Module: MMM-Ff-cht-sh
+ * Module: MMM-FF-cht-sh
  *
  * By Michael Trenkler
  * ISC Licensed.
  */
 
-.MMM-Ff-cht-sh {
+.MMM-FF-cht-sh {
   position: absolute !important;
   top: 0;
   left: 0;
@@ -32,7 +32,7 @@
     scroll-behavior: smooth;
   }
 
-  @keyframes MMM-Ff-cht-sh-curl-input {
+  @keyframes MMM-FF-cht-sh-curl-input {
     0% {
       clip-path: inset(0 100% 0 0);
     }
@@ -42,12 +42,12 @@
   }
 
   .curl-input {
-    animation: MMM-Ff-cht-sh-curl-input 2s steps(40) forwards;
+    animation: MMM-FF-cht-sh-curl-input 2s steps(40) forwards;
     width: 40ch;
     font-weight: bold;
   }
 
-  @keyframes MMM-Ff-cht-sh-cursor-loading {
+  @keyframes MMM-FF-cht-sh-cursor-loading {
     0% {
       opacity: 1;
     }
@@ -60,7 +60,7 @@
   }
 
   .cursor-loading {
-    animation: MMM-Ff-cht-sh-cursor-loading 1s linear infinite;
+    animation: MMM-FF-cht-sh-cursor-loading 1s linear infinite;
   }
 
   .loading-pager {
@@ -69,7 +69,7 @@
 }
 
 .fullscreen {
-  .MMM-Ff-cht-sh {
+  .MMM-FF-cht-sh {
     &.module-header {
       margin: 1rem 1rem 0 1rem;
     }

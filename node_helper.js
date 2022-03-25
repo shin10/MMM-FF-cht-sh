@@ -1,5 +1,5 @@
 /* Magic Mirror
- * Module: MMM-Ff-cht-sh
+ * Module: MMM-FF-cht-sh
  *
  * By Michael Trenkler
  * ISC Licensed.
@@ -28,10 +28,14 @@ module.exports = NodeHelper.create({
     if (config.updateInterval === null) return;
 
     config.updateOnVisibilityChangeRequested = false;
-    if (!this.instanceData[config.moduleId]) this.instanceData[config.moduleId] = config;
+    if (!this.instanceData[config.moduleId])
+      this.instanceData[config.moduleId] = config;
     const instanceConfig = this.instanceData[config.moduleId];
 
-    const timerObj = setTimeout(() => this.intervalCallback(instanceConfig), config.updateInterval);
+    const timerObj = setTimeout(
+      () => this.intervalCallback(instanceConfig),
+      config.updateInterval
+    );
 
     timerObj.unref();
 
@@ -74,7 +78,9 @@ module.exports = NodeHelper.create({
     if (!instanceConfig) return;
     const cheatSheet = instanceConfig.cheatSheet;
     if (!cheatSheet?.path) return;
-    let num = instanceConfig.sheets.findIndex((_) => _.path === cheatSheet.path);
+    let num = instanceConfig.sheets.findIndex(
+      (_) => _.path === cheatSheet.path
+    );
     --num;
     if (num < 0) num = instanceConfig.sheets.length - 1;
     this.getCheatSheet(config, instanceConfig.sheets[num]);
@@ -84,7 +90,9 @@ module.exports = NodeHelper.create({
     const instanceConfig = this.instanceData[config.moduleId];
     if (!instanceConfig) return;
     const cheatSheet = instanceConfig.cheatSheet;
-    let num = instanceConfig.sheets.findIndex((_) => _.path === cheatSheet.path);
+    let num = instanceConfig.sheets.findIndex(
+      (_) => _.path === cheatSheet.path
+    );
     ++num;
     if (num >= instanceConfig.sheets.length) num = 0;
     this.getCheatSheet(config, instanceConfig.sheets[num]);
@@ -103,7 +111,9 @@ module.exports = NodeHelper.create({
     switch (notification) {
       case "GET_INITIAL_CHEAT_SHEET":
         if (this.instanceData[config.moduleId]) {
-          this.sendSocketNotification("UPDATE_CHEAT_SHEET", { config: this.prepareNotificationConfig(instanceConfig) });
+          this.sendSocketNotification("UPDATE_CHEAT_SHEET", {
+            config: this.prepareNotificationConfig(instanceConfig)
+          });
         } else {
           let initialUrlIdx;
           switch (instanceConfig.sequence) {
@@ -139,15 +149,24 @@ module.exports = NodeHelper.create({
         break;
       case "SUSPEND":
         instanceConfig.hidden = true;
-        if (instanceConfig.updateOnVisibilityChangeRequested && instanceConfig.updateOnSuspension === true) {
+        if (
+          instanceConfig.updateOnVisibilityChangeRequested &&
+          instanceConfig.updateOnSuspension === true
+        ) {
           this.proceed(instanceConfig);
-        } else if (!instanceConfig.timerObj && instanceConfig.updateOnSuspension !== true) {
+        } else if (
+          !instanceConfig.timerObj &&
+          instanceConfig.updateOnSuspension !== true
+        ) {
           this.startInterval(instanceConfig);
         }
         break;
       case "RESUME":
         instanceConfig.hidden = false;
-        if (instanceConfig.updateOnVisibilityChangeRequested && instanceConfig.updateOnSuspension === false) {
+        if (
+          instanceConfig.updateOnVisibilityChangeRequested &&
+          instanceConfig.updateOnSuspension === false
+        ) {
           this.proceed(instanceConfig);
         } else if (!instanceConfig.timerObj) {
           this.startInterval(instanceConfig);
@@ -163,16 +182,26 @@ module.exports = NodeHelper.create({
     const $ = cheerio.load(markup);
     const style = $("head > style");
     const header = $("body > form > span");
-    header.append('<span class="path">' + $("body > form input[name=topic]").val() + '<span class="path">');
+    header.append(
+      '<span class="path">' +
+        $("body > form input[name=topic]").val() +
+        '<span class="path">'
+    );
     const pre = $("body > form + pre");
-    pre.find("script,link,img,image,svg,map,area,audio,video,track,object,applet,embed,iframe,param,picture,portal,source").remove();
+    pre
+      .find(
+        "script,link,img,image,svg,map,area,audio,video,track,object,applet,embed,iframe,param,picture,portal,source"
+      )
+      .remove();
     instanceConfig.cheatSheet = {
       path: path,
       header: $.html(header),
       style: $.html(style),
       html: $.html(pre)
     };
-    this.sendSocketNotification("UPDATE_CHEAT_SHEET", { config: this.prepareNotificationConfig(instanceConfig) });
+    this.sendSocketNotification("UPDATE_CHEAT_SHEET", {
+      config: this.prepareNotificationConfig(instanceConfig)
+    });
     this.startInterval(config);
   },
 
@@ -182,7 +211,9 @@ module.exports = NodeHelper.create({
       _.weight = _.weight !== undefined ? _.weight : 1 / config.sheets.length;
       return _;
     });
-    let weightTotal = weightCorrectedItems.map((_) => _.weight).reduce((a, b) => a + b);
+    let weightTotal = weightCorrectedItems
+      .map((_) => _.weight)
+      .reduce((a, b) => a + b);
     let p = Math.random() * weightTotal;
     let wSum = 0;
     let sheet = null;
@@ -212,9 +243,16 @@ module.exports = NodeHelper.create({
 
     instanceConfig.cheatSheet = {
       path: path,
-      header: `<pre class="curl-input">` + `$ curl cheat.sh/${path}` + `<span class="cursor-loading">${instanceConfig.loadingCursor}</span>` + `</pre>` + (total ? `<pre class="loading-pager">[${num}/${total}]</pre>` : "")
+      header:
+        `<pre class="curl-input">` +
+        `$ curl cheat.sh/${path}` +
+        `<span class="cursor-loading">${instanceConfig.loadingCursor}</span>` +
+        `</pre>` +
+        (total ? `<pre class="loading-pager">[${num}/${total}]</pre>` : "")
     };
-    this.sendSocketNotification("UPDATE_CHEAT_SHEET", { config: this.prepareNotificationConfig(instanceConfig) });
+    this.sendSocketNotification("UPDATE_CHEAT_SHEET", {
+      config: this.prepareNotificationConfig(instanceConfig)
+    });
   },
 
   getRandomStyle: function (styles) {
@@ -262,7 +300,8 @@ module.exports = NodeHelper.create({
 
   getCheatSheet: function (config, sheet) {
     const instanceConfig = this.instanceData[config.moduleId] || config;
-    const isLoading = instanceConfig.cheatSheet && !instanceConfig.cheatSheet.html;
+    const isLoading =
+      instanceConfig.cheatSheet && !instanceConfig.cheatSheet.html;
     if (isLoading) return;
 
     this.showPreloader(config, sheet.path);

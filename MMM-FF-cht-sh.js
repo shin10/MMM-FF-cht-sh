@@ -1,11 +1,11 @@
 /* Magic Mirror
- * Module: MMM-Ff-cht-sh
+ * Module: MMM-FF-cht-sh
  *
  * By Michael Trenkler
  * ISC Licensed.
  */
 
-Module.register("MMM-Ff-cht-sh", {
+Module.register("MMM-FF-cht-sh", {
   defaults: {
     header: "cht.sh",
     baseURL: "https://cht.sh/",
@@ -62,7 +62,7 @@ Module.register("MMM-Ff-cht-sh", {
   },
 
   getStyles: function () {
-    return [this.file("./styles/MMM-Ff-cht-sh.css")];
+    return [this.file("./styles/MMM-FF-cht-sh.css")];
   },
 
   getHeader: function () {

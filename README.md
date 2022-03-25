@@ -1,6 +1,6 @@
 ![Magic Mirror² displaying a cheat sheet from https://cht.sh](screenshot.png)
 
-# MMM-Ff-cht-sh
+# MMM-FF-cht-sh
 
 [![ISC License](https://img.shields.io/badge/license-ISC-blue.svg)](https://choosealicense.com/licenses/isc)
 
@@ -19,9 +19,9 @@ Features:
 Navigate to the `modules` directory of your MagicMirror² installation and clone this repository.
 
 ```sh
-git clone https://github.com/shin10/MMM-Ff-cht-sh.git
+git clone https://github.com/shin10/MMM-FF-cht-sh.git
 $(
-  cd MMM-Ff-cht-sh &&
+  cd MMM-FF-cht-sh &&
   npm i
 )
 ```
@@ -32,7 +32,7 @@ $(
 
 ```js
 {
-  module: "MMM-Ff-cht-sh",
+  module: "MMM-FF-cht-sh",
   position: "fullscreen_above",
   header: "cht.sh",
   config: {

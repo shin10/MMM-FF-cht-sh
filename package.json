@@ -2,10 +2,10 @@
   "name": "mmm-cht-sh",
   "version": "1.0.0",
   "description": "Module for Magic Mirror 2 displaying cheat sheets from http://cht.sh",
-  "main": "MMM-Ff-cht-sh.js",
+  "main": "MMM-FF-cht-sh.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shin10/MMM-Ff-cht-sh.git"
+    "url": "git+https://github.com/shin10/MMM-FF-cht-sh.git"
   },
   "keywords": [
     "Magic Mirror Module",
@@ -17,9 +17,9 @@
   "author": "Michael Trenkler",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shin10/MMM-Ff-cht-sh/issues"
+    "url": "https://github.com/shin10/MMM-FF-cht-sh/issues"
   },
-  "homepage": "https://github.com/shin10/MMM-Ff-cht-sh#readme",
+  "homepage": "https://github.com/shin10/MMM-FF-cht-sh#readme",
   "dependencies": {
     "axios": "^0.26.0",
     "cheerio": "^1.0.0-rc.10"
