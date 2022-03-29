@@ -104,7 +104,8 @@ Module.register("MMM-FF-cht-sh", {
   },
 
   socketNotificationReceived: function (notification, payload) {
-    if (payload.config.moduleId !== this.config.moduleId) return;
+    if (!payload.config || payload.config.moduleId !== this.config.moduleId)
+      return;
     switch (notification) {
       case "ERROR":
         this.config.cheatSheet = this.cheatSheetData = null;
