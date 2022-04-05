@@ -80,7 +80,7 @@ Module.register("MMM-FF-cht-sh", {
     }
 
     if (!this.cheatSheetData?.path) {
-      wrapper.innerHTML = "Loading...";
+      wrapper.innerHTML = this.translate("LOADING");
       wrapper.className = "light small dimmed";
     } else if (!this.cheatSheetData?.html) {
       wrapper.innerHTML = this.cheatSheetData?.header;
