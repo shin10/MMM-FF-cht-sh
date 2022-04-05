@@ -302,7 +302,8 @@ module.exports = NodeHelper.create({
     const instanceConfig = this.instanceData[config.moduleId] || config;
     const isLoading =
       instanceConfig.cheatSheet && !instanceConfig.cheatSheet.html;
-    if (isLoading) return;
+
+    // if (isLoading) return; // sometimes strange errors can't be catched :(
 
     this.showPreloader(config, sheet.path);
 
@@ -326,7 +327,9 @@ module.exports = NodeHelper.create({
       })
       .catch((err) => {
         console.error(err);
-        this.config.sheet.html = "";
+        sheet.html = "";
+        const instanceConfig = (this.instanceData[config.moduleId] = config);
+        instanceConfig.cheatSheet = sheet;
         this.sendSocketNotification("ERROR", { config: config, error: err });
       });
   }
