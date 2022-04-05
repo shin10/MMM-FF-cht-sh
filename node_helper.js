@@ -324,6 +324,10 @@ module.exports = NodeHelper.create({
       .then((response) => {
         this.updateCheatSheet(config, sheet.path, response.data);
       })
-      .catch((err) => this.sendSocketNotification("ERROR", { error: err }));
+      .catch((err) => {
+        console.error(err);
+        this.config.sheet.html = "";
+        this.sendSocketNotification("ERROR", { config: config, error: err });
+      });
   }
 });
