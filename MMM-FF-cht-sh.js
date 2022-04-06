@@ -139,40 +139,42 @@ Module.register("MMM-FF-cht-sh", {
   notificationReceived: function (notification, payload, sender) {
     if (!this.isAcceptableSender(sender)) return;
 
-    switch (notification) {
-      case this.config.events.CHEAT_SHEET_SCROLL_DOWN:
-        if (!this.hidden) this.scrollCheatSheet(1 * (payload || 1));
-        break;
-      case this.config.events.CHEAT_SHEET_SCROLL_UP:
-        if (!this.hidden) this.scrollCheatSheet(-1 * (payload || 1));
-        break;
-      case this.config.events.CHEAT_SHEET_LIST_ITEM_PREVIOUS:
-        if (!this.hidden)
-          this.sendSocketNotification("GET_PREVIOUS_CHEAT_SHEET_LIST_ITEM", {
-            config: this.config
-          });
-        break;
-      case this.config.events.CHEAT_SHEET_LIST_ITEM_NEXT:
-        if (!this.hidden)
-          this.sendSocketNotification("GET_NEXT_CHEAT_SHEET_LIST_ITEM", {
-            config: this.config
-          });
-        break;
-      case this.config.events.CHEAT_SHEET_LIST_ITEM_RANDOM:
-        if (!this.hidden)
-          this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET_LIST_ITEM", {
-            config: this.config
-          });
-        break;
-      case this.config.events.CHEAT_SHEET_RANDOM:
-        if (!this.hidden)
-          this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET", {
-            config: this.config
-          });
-        break;
-      default:
-        break;
-    }
+    this.config.events[notification]?.split(" ").each((e) => {
+      switch (e) {
+        case "CHEAT_SHEET_SCROLL_DOWN":
+          if (!this.hidden) this.scrollCheatSheet(1 * (payload || 1));
+          break;
+        case "CHEAT_SHEET_SCROLL_UP":
+          if (!this.hidden) this.scrollCheatSheet(-1 * (payload || 1));
+          break;
+        case "CHEAT_SHEET_LIST_ITEM_PREVIOUS":
+          if (!this.hidden)
+            this.sendSocketNotification("GET_PREVIOUS_CHEAT_SHEET_LIST_ITEM", {
+              config: this.config
+            });
+          break;
+        case "CHEAT_SHEET_LIST_ITEM_NEXT":
+          if (!this.hidden)
+            this.sendSocketNotification("GET_NEXT_CHEAT_SHEET_LIST_ITEM", {
+              config: this.config
+            });
+          break;
+        case "CHEAT_SHEET_LIST_ITEM_RANDOM":
+          if (!this.hidden)
+            this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET_LIST_ITEM", {
+              config: this.config
+            });
+          break;
+        case "CHEAT_SHEET_RANDOM":
+          if (!this.hidden)
+            this.sendSocketNotification("GET_RANDOM_CHEAT_SHEET", {
+              config: this.config
+            });
+          break;
+        default:
+          break;
+      }
+    });
   },
 
   suspend: function () {
