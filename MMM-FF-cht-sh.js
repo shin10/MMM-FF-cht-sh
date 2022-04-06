@@ -75,7 +75,13 @@ Module.register("MMM-FF-cht-sh", {
     wrapper.classList.add("cht-sh");
 
     if (this.error) {
-      wrapper.innerHTML = "ERROR: " + JSON.stringify(this.error);
+      wrapper.innerHTML = `
+      <div class="header large bright">
+        <span class="status xlarge dimmed"><span class="err xsmall dimmed">${this.error.name}</span><br>${this.error.status}</span>
+        ${this.error.code}
+      </div>
+      <div class="large">${this.error.message}</div>
+      <div class="regular dimmed">${this.error.stack}</div>`;
       return wrapper;
     }
 
@@ -109,7 +115,7 @@ Module.register("MMM-FF-cht-sh", {
     switch (notification) {
       case "ERROR":
         this.config.cheatSheet = this.cheatSheetData = null;
-        this.error = payload;
+        this.error = payload.error;
         this.updateDom(this.config.animationSpeed);
         break;
       case "UPDATE_CHEAT_SHEET":
