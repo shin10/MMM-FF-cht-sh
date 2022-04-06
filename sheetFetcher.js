@@ -12,6 +12,7 @@ const SheetFetcher = function (nodeHelper, config) {
   var {
     moduleId,
     baseURL,
+    options,
     sheets,
     sequence,
     updateOnSuspension,
@@ -246,13 +247,13 @@ const SheetFetcher = function (nodeHelper, config) {
     showPreloader(sheet.path);
 
     // the cht.sh server is experiencing issues with the valueless `options`
-    let options = sheet.options ?? options;
+    let flags = sheet.options ?? options;
     let style = sheet.style ?? style;
     if (style === ":random") style = getRandomStyle();
     if (Array.isArray(style)) style = getRandomStyle(style);
 
     const params = [];
-    if (options) params.push(options);
+    if (flags) params.push(flags);
     if (style) params.push("style=" + style);
 
     const url = [baseURL + sheet.path];
