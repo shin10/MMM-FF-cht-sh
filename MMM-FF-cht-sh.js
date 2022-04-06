@@ -139,7 +139,7 @@ Module.register("MMM-FF-cht-sh", {
   notificationReceived: function (notification, payload, sender) {
     if (!this.isAcceptableSender(sender)) return;
 
-    this.config.events[notification]?.split(" ").each((e) => {
+    this.config.events[notification]?.split(" ").forEach((e) => {
       switch (e) {
         case "CHEAT_SHEET_SCROLL_DOWN":
           if (!this.hidden) this.scrollCheatSheet(1 * (payload || 1));

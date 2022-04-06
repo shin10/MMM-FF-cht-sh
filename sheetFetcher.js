@@ -29,7 +29,7 @@ const SheetFetcher = function (nodeHelper, config) {
   var updateOnVisibilityChangeRequested = false;
 
   const startInterval = () => {
-    this.stopInterval();
+    stopInterval();
 
     updateOnVisibilityChangeRequested = false;
 
@@ -56,7 +56,7 @@ const SheetFetcher = function (nodeHelper, config) {
   };
 
   const proceed = () => {
-    this.stopInterval(config);
+    stopInterval(config);
 
     if (cheatSheet?.html) return;
 
@@ -275,18 +275,18 @@ const SheetFetcher = function (nodeHelper, config) {
   this.suspend = () => {
     hidden = true;
     if (updateOnVisibilityChangeRequested && updateOnSuspension === true) {
-      this.proceed();
+      proceed();
     } else if (!timerObj && updateOnSuspension !== true) {
-      this.startInterval();
+      startInterval();
     }
   };
 
   this.resume = () => {
     hidden = false;
     if (updateOnVisibilityChangeRequested && updateOnSuspension === false) {
-      this.proceed();
+      proceed();
     } else if (!timerObj) {
-      this.startInterval();
+      startInterval();
     }
   };
 };
