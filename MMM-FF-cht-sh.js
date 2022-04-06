@@ -76,12 +76,12 @@ Module.register("MMM-FF-cht-sh", {
 
     if (this.error) {
       wrapper.innerHTML = `
-      <div class="header large bright">
+      <div class="header large bright thin">
         <span class="status xlarge dimmed"><span class="err xsmall dimmed">${this.error.name}</span><br>${this.error.status}</span>
         ${this.error.code}
       </div>
-      <div class="large">${this.error.message}</div>
-      <div class="regular dimmed">${this.error.stack}</div>`;
+      <div class="large light">${this.error.message}</div>
+      <div class="regular light dimmed">${this.error.stack}</div>`;
       return wrapper;
     }
 

@@ -13,6 +13,7 @@ const SheetFetcher = function (nodeHelper, config) {
     moduleId,
     baseURL,
     options,
+    style,
     sheets,
     sequence,
     updateOnSuspension,
@@ -248,28 +249,35 @@ const SheetFetcher = function (nodeHelper, config) {
 
     // the cht.sh server is experiencing issues with the valueless `options`
     let flags = sheet.options ?? options;
-    let style = sheet.style ?? style;
-    if (style === ":random") style = getRandomStyle();
-    if (Array.isArray(style)) style = getRandomStyle(style);
+    let theme = sheet.style ?? style;
+    if (theme === ":random") theme = getRandomStyle();
+    if (Array.isArray(theme)) theme = getRandomStyle(theme);
 
     const params = [];
     if (flags) params.push(flags);
-    if (style) params.push("style=" + style);
+    if (theme) params.push("style=" + theme);
 
     const url = [baseURL + sheet.path];
     if (params.length) url.push(params.join("&"));
 
-    axios
-      .get(url.join("?"))
-      .then((response) => {
-        updateCheatSheet(sheet.path, response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-        sheet.html = "";
-        cheatSheet = sheet;
-        nodeHelper.sendSocketNotification("ERROR", { config, error });
-      });
+    try {
+      axios
+        .get(url.join("?"))
+        .then((response) => {
+          updateCheatSheet(sheet.path, response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+          sheet.html = "";
+          cheatSheet = sheet;
+          nodeHelper.sendSocketNotification("ERROR", { config, error });
+        });
+    } catch (error) {
+      console.error(error);
+      sheet.html = "";
+      cheatSheet = sheet;
+      nodeHelper.sendSocketNotification("ERROR", { config, error });
+    }
   };
 
   this.suspend = () => {
