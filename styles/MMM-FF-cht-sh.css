@@ -19,8 +19,7 @@
 
 .MMM-FF-cht-sh .pre,
 .MMM-FF-cht-sh pre {
-  font-family: "DejaVu Sans Mono", Menlo, "Lucida Sans Typewriter",
-    "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
+  font-family: "DejaVu Sans Mono", Menlo, "Lucida Sans Typewriter", "Lucida Console", monaco, "Bitstream Vera Sans Mono", monospace;
   font-size: 75%;
   white-space: break-spaces;
 }
@@ -35,28 +34,28 @@
 @-webkit-keyframes MMM-FF-cht-sh-curl-input {
   0% {
     -webkit-clip-path: inset(0 100% 0 0);
-    clip-path: inset(0 100% 0 0);
+            clip-path: inset(0 100% 0 0);
   }
   100% {
     -webkit-clip-path: inset(0 0 0 0);
-    clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
   }
 }
 
 @keyframes MMM-FF-cht-sh-curl-input {
   0% {
     -webkit-clip-path: inset(0 100% 0 0);
-    clip-path: inset(0 100% 0 0);
+            clip-path: inset(0 100% 0 0);
   }
   100% {
     -webkit-clip-path: inset(0 0 0 0);
-    clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
   }
 }
 
 .MMM-FF-cht-sh .curl-input {
   -webkit-animation: MMM-FF-cht-sh-curl-input 2s steps(40) forwards;
-  animation: MMM-FF-cht-sh-curl-input 2s steps(40) forwards;
+          animation: MMM-FF-cht-sh-curl-input 2s steps(40) forwards;
   width: 40ch;
   font-weight: bold;
 }
@@ -87,7 +86,7 @@
 
 .MMM-FF-cht-sh .cursor-loading {
   -webkit-animation: MMM-FF-cht-sh-cursor-loading 1s linear infinite;
-  animation: MMM-FF-cht-sh-cursor-loading 1s linear infinite;
+          animation: MMM-FF-cht-sh-cursor-loading 1s linear infinite;
 }
 
 .MMM-FF-cht-sh .loading-pager {
@@ -109,13 +108,13 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   justify-items: center;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-line-pack: center;
-  align-content: center;
+      align-content: center;
 }
 /*# sourceMappingURL=MMM-FF-cht-sh.css.map */

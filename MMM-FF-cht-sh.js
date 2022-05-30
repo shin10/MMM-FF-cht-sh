@@ -25,7 +25,7 @@ Module.register("MMM-FF-cht-sh", {
       { path: "cheat:tar" },
       { path: "tldr:tar" }
     ],
-    options: "q",
+    options: null,
     style: "default",
     sequence: "default", // null, 'random', 'default', 'reverse'
     updateOnSuspension: null, // null, false or true

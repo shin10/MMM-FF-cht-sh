@@ -122,6 +122,7 @@ const SheetFetcher = function (nodeHelper, config) {
     });
 
   const updateCheatSheet = (path, markup) => {
+    if (!markup) return;
     const $ = cheerio.load(markup);
     const style = $("head > style");
     const header = $("body > form > span");
@@ -247,7 +248,8 @@ const SheetFetcher = function (nodeHelper, config) {
 
     showPreloader(sheet.path);
 
-    // the cht.sh server is experiencing issues with the valueless `options`
+    // ~~the cht.sh server is experiencing issues with the valueless `options`~~
+    // the cht.sh server returns status 429 with option q (quiet)
     let flags = sheet.options ?? options;
     let theme = sheet.style ?? style;
     if (theme === ":random") theme = getRandomStyle();

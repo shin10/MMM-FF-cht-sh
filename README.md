@@ -42,7 +42,7 @@ $(
       { path: ":firstpage" },
       { path: ":firstpage-v1" },
       { path: ":random", style: "default", weight: 10 },
-      { path: ":help", options: "qT" },
+      { path: ":help", options: "T" },
       { path: ":styles-demo" },
 
       // some examples
@@ -61,7 +61,7 @@ $(
       { path: "cheat:tar" },
       { path: "tldr:tar" }
     ],
-    options: "q",
+    options: null,
     style: ["default", "monokai"],
     sequence: null,
     updateOnSuspension: null,
@@ -88,7 +88,7 @@ $(
 | `header`             | `string`         | `"cht.sh"`            | Basically that. Doesn't have to be changed unless you're self-hosting.                                                                                                          |
 | `baseURL`            | `string`         | `"https://cht.sh/"`   | Basically that. Doesn't have to be changed unless you're self-hosting.                                                                                                          |
 | `sheets`             | `Array<sheet>`   |                       | The list of cheat sheets to rotate through.                                                                                                                                     |
-| `options`            | `string`         | `"q"`                 | The url options `qTcCQ` as described [here](https://cht.sh/:help).                                                                                                              |
+| `options`            | `string`         | `null`                | The url options `qTcCQ` as described [here](https://cht.sh/:help).                                                                                                              |
 | `style`              | `string`         | `"default"`           | Your favorite color theme. You can provide a string, `:random`, or an Array of themes. [Demo](https://cht.sh/:styles-demo) (probably outdated)                                  |
 | `sequence`           | `string`         | `"default"`           | The direction to loop through the urls list. `null`/`default`, `reverse`, `random`. The `weight` property of an url item will only be respected if sequence is set to `random`. |
 | `updateInterval`     | `int`            | `600000` (10 minutes) | The duration of the update interval in ms or `null`.                                                                                                                            |
